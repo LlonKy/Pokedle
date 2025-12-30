@@ -64,12 +64,16 @@ class PokemonController
         return ($userVal < $dailyVal) ? "higher" : "lower";
     }
 
-    private function compareTypes($userType, $dailyType1, $dailyType2): string {
-        if ($userType === null) return "incorrect";
-        if ($userType === $dailyType1 || $userType === $dailyType2) {
-            return ($userType === $dailyType1 || $userType === $dailyType2) && 
-                ($userType === $dailyType1 || $userType === $dailyType2) ? "correct" : "partial"; 
-        }
-        return "incorrect";
+    private function compareTypes($userType, $dailyPkmn, $pos): string {
+    if (!$userType) return "incorrect";
+    
+    if ($pos === 1 && $userType === $dailyPkmn['type1']) return "correct";
+    if ($pos === 2 && $userType === $dailyPkmn['type2']) return "correct";
+
+    if ($userType === $dailyPkmn['type1'] || $userType === $dailyPkmn['type2']) {
+        return "partial";
     }
+
+    return "incorrect";
+}
 }
