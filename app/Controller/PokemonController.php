@@ -64,6 +64,10 @@ class PokemonController
     }
 
     private function checkType($userType, $targetType1, $targetType2, $pos): string {
+    if ($pos === 2 && $userType === null && $targetType2 === null) {
+        return "correct";
+    }
+
     if (!$userType) return "incorrect";
     
     if ($pos === 1 && $userType === $targetType1) return "correct";

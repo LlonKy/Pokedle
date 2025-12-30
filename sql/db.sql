@@ -1,4 +1,4 @@
-CREATE DATABASE pokemon_wordle
+CREATE DATABASE pokedle
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 

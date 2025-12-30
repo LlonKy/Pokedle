@@ -1,7 +1,9 @@
-async function makeGuess(pokemonName) {
+async function makeGuess() {
     const url = 'http://localhost/api/index.php';
 
+    
     try {
+        const pokemonName = document.getElementById('guessInput').value;
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -25,26 +27,18 @@ async function makeGuess(pokemonName) {
     }
 }
 
-async function enviarGuess() {
-    const name = document.getElementById('guessInput').value;
-
-    const response = await fetch('/api/index.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ guess: name })
-    });
-
-    const data = await response.json();
-    console.log("Respuesta del servidor:", data);
-}
 
 function renderComparison(comparison) {
-    // Así es como usarías los datos para el CSS
     console.log("--- Resultado del Guess ---");
 
     for (const [key, info] of Object.entries(comparison)) {
-        // Ignoramos el valor del nombre para el log de colores
         if (key === 'name') continue;
+
+
+        let displayValue = info.value;
+        if (info.value === null) {
+            displayValue = "None"; 
+        }
 
         let icon = "";
         if (info.result === "correct") icon = "✅";
@@ -53,9 +47,7 @@ function renderComparison(comparison) {
         else if (info.result === "lower") icon = "⬇️";
         else icon = "❌";
 
-        console.log(`${key.toUpperCase()}: ${info.value} ${icon}`);
+
+        console.log(`${key.toUpperCase()}: ${displayValue} ${icon}`);
     }
 }
-
-// Probar con un pokemon
-makeGuess("lapras");
