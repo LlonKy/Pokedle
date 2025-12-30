@@ -58,4 +58,4 @@ function renderComparison(comparison) {
 }
 
 // Probar con un pokemon
-makeGuess("pikachu");
+makeGuess("lapras");

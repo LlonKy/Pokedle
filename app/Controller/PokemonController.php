@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . "/../Model/PokemonModel.php";
 
 class PokemonController
 {
@@ -32,11 +31,11 @@ class PokemonController
         ],
         "type1" => [
             "value" => $userPokemon['type1'],
-            "result" => $this->compareTypes($userPokemon['type1'], $daily['type1'], $daily['type2'])
+            "result" => $this->checkType($userPokemon['type1'], $daily['type1'], $daily['type2'], 1)
         ],
         "type2" => [
             "value" => $userPokemon['type2'],
-            "result" => $this->compareTypes($userPokemon['type2'], $daily['type1'], $daily['type2'])
+            "result" => $this->checkType($userPokemon['type2'], $daily['type1'], $daily['type2'], 2)
         ],
         "generation" => [
             "value" => $userPokemon['generation'],
@@ -64,13 +63,13 @@ class PokemonController
         return ($userVal < $dailyVal) ? "higher" : "lower";
     }
 
-    private function compareTypes($userType, $dailyPkmn, $pos): string {
+    private function checkType($userType, $targetType1, $targetType2, $pos): string {
     if (!$userType) return "incorrect";
     
-    if ($pos === 1 && $userType === $dailyPkmn['type1']) return "correct";
-    if ($pos === 2 && $userType === $dailyPkmn['type2']) return "correct";
+    if ($pos === 1 && $userType === $targetType1) return "correct";
+    if ($pos === 2 && $userType === $targetType2) return "correct";
 
-    if ($userType === $dailyPkmn['type1'] || $userType === $dailyPkmn['type2']) {
+    if ($userType === $targetType1 || $userType === $targetType2) {
         return "partial";
     }
 

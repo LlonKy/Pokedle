@@ -1,7 +1,12 @@
 <?php
+
 header("Content-Type: application/json");
 
-require_once "../app/Controller/PokemonController.php";
+define('ROOT_PATH', dirname(__DIR__) . '/');
+
+require_once ROOT_PATH . "app/Model/Model.php";
+require_once ROOT_PATH . "app/Model/PokemonModel.php";
+require_once ROOT_PATH . "app/Controller/PokemonController.php";
 
 $method = $_SERVER["REQUEST_METHOD"];
 
